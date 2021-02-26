@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
     const { value, error } = schema.validate(req.body);
 
     if (error) {
-        res.status(400).json({
+        return res.status(400).json({
             success: true,
             message: error.message,
             data: {},
@@ -67,7 +67,7 @@ router.post("/login", async (req, res) => {
     const { value, error } = schema.validate(req.body);
 
     if (error) {
-        res.status(400).json({
+        return res.status(400).json({
             success: true,
             message: error.message,
             data: {},
