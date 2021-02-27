@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as joi from "joi";
+import joi from "joi";
 import { compareSync, hashSync, genSaltSync } from "bcryptjs";
 import User from "../models/User";
 import * as jwt from "../util/jwt";

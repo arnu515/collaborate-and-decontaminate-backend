@@ -2,15 +2,16 @@ if (process.env.NODE_ENV || "development" === "development") {
     require("dotenv").config(require("path").join(__dirname, "../.env"));
 }
 
-import * as express from "express";
-import * as http from "http";
+import "newrelic";
+import express from "express";
+import http from "http";
 import createSocketIO from "./io";
 import { connect } from "./database";
-import * as cors from "cors";
-import * as morgan from "morgan";
-import * as session from "express-session";
-import * as createRedisStore from "connect-redis";
-import * as Redis from "ioredis";
+import cors from "cors";
+import morgan from "morgan";
+import session from "express-session";
+import createRedisStore from "connect-redis";
+import Redis from "ioredis";
 import routers from "./controllers";
 import corsConfig from "./config/cors.config";
 import chatSocketIO from "./io/chat";
