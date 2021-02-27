@@ -13,12 +13,14 @@ import * as createRedisStore from "connect-redis";
 import { rd } from "./util/redis";
 import routers from "./controllers";
 import corsConfig from "./config/cors.config";
+import chatSocketIO from "./io/chat";
 
 const app = express();
 const server = http.createServer(app);
 const io = createSocketIO(server, { cors: corsConfig, serveClient: false });
 const RedisStore = createRedisStore(session);
-io;
+
+chatSocketIO(io);
 
 async function main() {
     await connect();
@@ -50,7 +52,7 @@ async function main() {
     });
 
     const { PORT = 5000 } = process.env;
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log("Server running on port " + PORT);
     });
 }
