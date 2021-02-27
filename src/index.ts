@@ -12,10 +12,11 @@ import * as session from "express-session";
 import * as createRedisStore from "connect-redis";
 import { rd } from "./util/redis";
 import routers from "./controllers";
+import corsConfig from "./config/cors.config";
 
 const app = express();
 const server = http.createServer(app);
-const io = createSocketIO(server);
+const io = createSocketIO(server, { cors: corsConfig, serveClient: false });
 const RedisStore = createRedisStore(session);
 io;
 
@@ -23,12 +24,7 @@ async function main() {
     await connect();
     console.log("Connected to database.");
 
-    app.use(
-        cors({
-            credentials: true,
-            origin: [process.env.WEBSITE_URL || "http://localhost:3000"],
-        })
-    );
+    app.use(cors(corsConfig));
     app.use(express.json());
     app.use(
         morgan(
