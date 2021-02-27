@@ -108,6 +108,14 @@ router.get("/user", auth, (req, res) => {
     });
 });
 
+router.get("/token", auth, (req, res) => {
+    return res.status(200).json({
+        success: true,
+        message: "Token",
+        data: { token: (req.session as any).token },
+    });
+});
+
 router.delete("/logout", auth, async (req, res) => {
     const { token } = req.session as any;
     const { user } = req as any;
