@@ -10,7 +10,7 @@ import * as cors from "cors";
 import * as morgan from "morgan";
 import * as session from "express-session";
 import * as createRedisStore from "connect-redis";
-import { rd } from "./util/redis";
+import * as Redis from "ioredis";
 import routers from "./controllers";
 import corsConfig from "./config/cors.config";
 import chatSocketIO from "./io/chat";
@@ -37,7 +37,13 @@ async function main() {
     );
     app.use(
         session({
-            store: new RedisStore({ client: rd }),
+            store: new RedisStore({
+                client: new Redis(
+                    process.env.SESSION_REDIS_URL ||
+                        process.env.REDIS_URL ||
+                        "redis://localhost:6379/1"
+                ),
+            }),
             secret: process.env.SESSION_SECRET || "secret123",
             resave: true,
             saveUninitialized: true,
