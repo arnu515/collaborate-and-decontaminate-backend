@@ -1,5 +1,6 @@
 import * as jwt from "../util/jwt";
 import type { Request, Response } from "express";
+import type { Socket } from "socket.io";
 
 export async function auth(req: Request, res: Response, next: () => void) {
     let { token } = req.session as any;
@@ -42,4 +43,23 @@ export async function auth(req: Request, res: Response, next: () => void) {
 
     (req as any).user = user;
     next();
+}
+
+export async function socketIOAuth(socket: Socket, next: any) {
+    let { token } = socket.handshake.auth;
+
+    const user = await jwt.validateToken(token);
+
+    if (!user) {
+        const error = new Error("This endpoint requires authentication");
+        (error as any)["data"] = {
+            success: false,
+            status: 401,
+            data: {},
+        };
+        return next(error);
+    }
+
+    (socket as any).user = user;
+    return next();
 }
