@@ -20,4 +20,12 @@ export const production: ConnectionOptions = {
     ...development,
     logging: false,
     synchronize: false,
+    entities: ["dist/models/**/*.ts"],
+    migrations: ["dist/migrations/**/*.ts"],
+    subscribers: ["dist/subscribers/**/*.ts"],
+    cli: {
+        entitiesDir: "dist/models",
+        migrationsDir: "dist/migrations",
+        subscribersDir: "dist/subscribers",
+    },
 };
