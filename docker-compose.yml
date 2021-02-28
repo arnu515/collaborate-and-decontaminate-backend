@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    ports:
+      - "5000:80"
+    environment:
+      - "REDIS_URL=redis://redis:6379/0"
+      - "SESSION_REDIS_URL=redis://redis:6379/1"
+      - "POSTGRES_URL=postgres://postgres:postgres@postgres:5432/postgres"
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
