@@ -19,9 +19,9 @@ export const development: ConnectionOptions = {
 export const production: ConnectionOptions = {
     ...development,
     logging: false,
-    entities: ["dist/models/**/*.ts"],
-    migrations: ["dist/migrations/**/*.ts"],
-    subscribers: ["dist/subscribers/**/*.ts"],
+    entities: ["dist/models/**/*.js"],
+    migrations: ["dist/migrations/**/*.js"],
+    subscribers: ["dist/subscribers/**/*.js"],
     cli: {
         entitiesDir: "dist/models",
         migrationsDir: "dist/migrations",
