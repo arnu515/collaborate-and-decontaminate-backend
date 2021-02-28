@@ -19,7 +19,6 @@ export const development: ConnectionOptions = {
 export const production: ConnectionOptions = {
     ...development,
     logging: false,
-    synchronize: false,
     entities: ["dist/models/**/*.ts"],
     migrations: ["dist/migrations/**/*.ts"],
     subscribers: ["dist/subscribers/**/*.ts"],
