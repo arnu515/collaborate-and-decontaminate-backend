@@ -52,6 +52,7 @@ async function main() {
                 maxAge: 3600 * 24 * 1000,
                 sameSite: "none",
                 httpOnly: true,
+                secure: true,
             },
         })
     );
