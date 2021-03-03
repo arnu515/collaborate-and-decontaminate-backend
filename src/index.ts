@@ -36,6 +36,7 @@ async function main() {
                 : "short"
         )
     );
+    app.set("trust proxy", 1);
     app.use(
         session({
             store: new RedisStore({
