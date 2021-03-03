@@ -50,6 +50,8 @@ async function main() {
             saveUninitialized: true,
             cookie: {
                 maxAge: 3600 * 24 * 1000,
+                sameSite: "none",
+                httpOnly: true,
             },
         })
     );
